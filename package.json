@@ -1,0 +1,86 @@
+{
+  "name": "@planet/ol-numpytiles",
+  "version": "2.0.0",
+  "description": "Layer and Source to support using NumpyTiles in OpenLayers",
+  "main": "./ol.js",
+  "public": true,
+  "scripts": {
+    "build": "run-s build-js build-cp",
+    "build-js": "babel ./src -d ./dist",
+    "build-cp": "node ./scripts/build-cp.js",
+    "cover": "jest --coverage",
+    "docs": "jsdoc2md -r ./src/* > ./API.md",
+    "lint": "eslint src/ __tests__/",
+    "npy2png": "babel-node ./scripts/npy2png.js",
+    "start": "parcel ./demo/index.html",
+    "test": "npm run lint ; jest",
+    "test:only": "jest",
+    "test:watch": "jest --watch",
+    "prepack": "npm run build"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(ol))"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules",
+      "/__tests__/util.js"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "jest": true
+    },
+    "extends": "planet/react",
+    "globals": {
+      "analytics": false,
+      "Raven": false
+    },
+    "plugins": [
+      "jest"
+    ],
+    "rules": {
+      "react/no-array-index-key": "warn"
+    },
+    "parser": "babel-eslint"
+  },
+  "keywords": [
+    "planet",
+    "openlayers",
+    "webgl",
+    "gl",
+    "tiles"
+  ],
+  "author": "Dan \"Ducky\" Little, Ian Schneider",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "ol": "^6.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/register": "^7.13.14",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "canvas": "^2.7.0",
+    "eslint": "^6.7.1",
+    "eslint-config-planet": "^18.1.2",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-react": "^7.23.2",
+    "file-api": "^0.10.4",
+    "jest": "^24.9.0",
+    "npm-run-all": "^4.1.5",
+    "ol": "^6.5.0",
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "expr-eval": "^2.0.2",
+    "jsdoc-to-markdown": "^6.0.1"
+  }
+}
