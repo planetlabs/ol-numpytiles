@@ -2,7 +2,7 @@
 
 OpenLayers support for the [NumpyTiles specification.](https://github.com/planetlabs/numpytiles-spec/)
 
-## Developing locally.
+## Developing locally
 
 After cloning the repository, run build, and use `npm link`. Example below:
 
@@ -56,4 +56,6 @@ const numpyLayer = new NumpyLayer({
 
 ## Demo!
 
-Demos are always fun. To see one run `npm start`!
+[Live demo available here!](https://planetlabs.github.io/ol-numpytiles/)
+
+The demo can be run locally using `npm start`.
