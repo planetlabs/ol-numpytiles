@@ -27,7 +27,8 @@ in a convenient fashion for a typical OpenLayers project.</p>
     source: numpySource,
     workerClass: NumpyWorker,
     maxWorkers: 2,
-  });</code></pre>
+  });
+</code></pre>
 </dd>
 </dl>
 
@@ -288,7 +289,7 @@ Draw the numpy data.
 Very basic wrapper around createStyleFunc which workerizes it.
 
 Example usage:
- 
+
 ```
   import NumpyWorker from 'worker-loader!@planet/ol-numpytiles/worker';
   import {NumpyLayer, NumpySource} from '@planet/ol-numpytiles/ol';
