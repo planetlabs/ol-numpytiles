@@ -8,7 +8,7 @@
     "build": "run-s build-js build-cp",
     "build-js": "babel ./src -d ./dist",
     "build-cp": "node ./scripts/build-cp.js",
-    "build-demo": "rm -rf docs/ ; parcel build ./demo/index.html -d ./docs",
+    "build-demo": "rm -rf docs/ ; parcel build ./demo/index.html -d ./docs --public-url ./",
     "cover": "jest --coverage",
     "docs": "jsdoc2md -r ./src/* > ./API.md",
     "lint": "eslint src/ __tests__/",
