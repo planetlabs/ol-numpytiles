@@ -23,15 +23,18 @@ import View from 'ol/View';
 import olMap from 'ol/Map';
 import {fromLonLat} from 'ol/proj';
 
+// 16-bit COG
+const COG =
+  'https://storage.googleapis.com/open-cogs/stac-examples/20201211_223832_CS2_analytic.tif';
+
 const numpySource = new NumpySource({
   url:
-    'https://api.cogeo.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=https%3A%2F%2Fopendata.digitalglobe.com%2Fevents%2Fmauritius-oil-spill%2Fpost-event%2F2020-08-12%2F105001001F1B5B00%2F105001001F1B5B00.tif&format=npy',
-  /* These are the source defaults but copied here
-   * to make experimentation easier.
-   */
-  dtype: 'uint8',
-  bands: ['r', 'g', 'b', 'a'],
-  pixelDepth: 256,
+    'https://api.cogeo.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=' +
+    encodeURIComponent(COG) +
+    '&format=npy',
+  dtype: 'uint16',
+  bands: ['b', 'g', 'r', 'n', 'a'],
+  pixelDepth: 65535,
 });
 
 const numpyLayer = new NumpyLayer({
@@ -65,7 +68,7 @@ const changeStyle = evt => {
       pixelDepth: numpySource.get('pixelDepth'),
     },
   };
-  numpySource.set('bands', ['r', 'g', 'b', 'a']);
+  numpySource.set('bands', ['r', 'g', 'b', 'n', 'a']);
 
   if (styleName === 'gray') {
     style.name = 'gray';
@@ -73,7 +76,7 @@ const changeStyle = evt => {
     style.name = 'onlyRed';
   } else if (styleName === 'bgr') {
     // swap the source band-order
-    numpySource.set('bands', ['b', 'g', 'r', 'a']);
+    numpySource.set('bands', ['b', 'g', 'r', 'n', 'a']);
   }
 
   numpyLayer.setStyle(style);
@@ -89,7 +92,7 @@ function init() {
       numpyLayer,
     ],
     view: new View({
-      center: fromLonLat([57.75213430160109, -20.403673802342773]),
+      center: fromLonLat([172.933, 1.35]),
       zoom: 13,
     }),
   });
