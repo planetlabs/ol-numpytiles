@@ -4,3 +4,4 @@ coverage/
 demo/.cache
 *.swp
 .cache
+.parcel-cache/

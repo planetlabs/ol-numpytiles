@@ -11,7 +11,7 @@
     "build-demo": "rm -rf docs/ ; parcel build ./demo/index.html -d ./docs --public-url ./",
     "cover": "jest --coverage",
     "docs": "jsdoc2md -r ./src/* > ./API.md",
-    "lint": "eslint src/ __tests__/",
+    "lint": "eslint demo/ src/ __tests__/",
     "npy2png": "babel-node ./scripts/npy2png.js",
     "start": "parcel ./demo/index.html",
     "test": "npm run lint ; jest",
