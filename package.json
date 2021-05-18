@@ -8,7 +8,7 @@
     "build": "run-s build-js build-cp",
     "build-js": "babel ./src -d ./dist",
     "build-cp": "node ./scripts/build-cp.js",
-    "build-demo": "rm -rf docs/ ; parcel build ./demo/index.html -d ./docs --public-url ./",
+    "build-demo": "rm -rf docs/ ; parcel build --dist-dir ./docs --public-url ./ ./demo/index.html",
     "cover": "jest --coverage",
     "docs": "jsdoc2md -r ./src/* > ./API.md",
     "lint": "eslint demo/ src/ __tests__/",
@@ -83,5 +83,8 @@
   },
   "dependencies": {
     "expr-eval": "^2.0.2"
+  },
+  "targets": {
+    "main": false
   }
 }
