@@ -12,22 +12,16 @@
   <div class="row">
     <div class="twelve column">
       <p>
-       This is a minimal demo for using NumpyTiles and rendering them in the client with OpenLayers.
-      </p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="twelve column">
-      <p>
-        NumpyTiles are rendered in the browser. The color on the map is redrawn without reloading the data!
+        The raster image below is drawn in an <a href="https://openlayers.org">OpenLayers</a> Map from a 16-bit <a href="https://github.com/planetlabs/numpytiles-spec/">NumpyTile</a> layer.
+        The controls below can change how bands are interpreted and colored.
+        Because NumpyTiles are rendered in the browser no additional calls to the server are made.
       </p>
     </div>
   </div>
 
   <div class="row" id="color-funcs">
     <div class="twelve column" style="vertical-align: middle">
-      <span style="font-size: 1.1em; margin-right: 2em">
+      <span style="font-size: 1.1em; margin-right: 2em; width: 120px; display: inline-block">
         Color function:
       </span>
 
@@ -39,6 +33,16 @@
   </div>
 
   <div class="row">
+    <div class="twelve column" style="vertical-align: middle">
+      <span style="font-size: 1.1em; margin-right: 2em; width: 120px; display: inline-block">
+        Color stretch:
+      </span>
+      <input id="range-min" type="number" min="0" max="15000" value="3000" label="Stretch minimum" />
+      <input id="range-max" type="number" min="150001" max="65535" value="30000" label="Stretch maximum" />
+    </div>
+  </div>
+
+  <div class="row">
     <div class="twleve column" id="map" style="border: solid 1px black; height: 600px;">
     </div>
   </div>
@@ -46,6 +50,7 @@
   <div class="row">
     <div class="twelve column">
       NumpyTiles provided by <a target="_blank" href="https://cogeo.xyz/">COGEO.xyz</a>.
+      Source imagery provided by <a target="_blank" href="https://planet.com">Planet</a>.
     </div>
   </div>
 </div>
