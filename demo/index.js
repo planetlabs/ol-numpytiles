@@ -22,6 +22,7 @@ import TileImageLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import olMap from 'ol/Map';
 import {fromLonLat} from 'ol/proj';
+import {levelsToCurve} from '../src/maths';
 
 // 16-bit COG
 const COG =
@@ -37,12 +38,25 @@ const numpySource = new NumpySource({
   pixelDepth: 65535,
 });
 
+const getColorCurve = (inMin, inMax) => {
+  // generate a stretch to apply to each band
+  const pxDepth = numpySource.get('pixelDepth');
+  const curve = levelsToCurve(pxDepth)([
+    [inMin, inMax],
+    [0, pxDepth],
+  ]);
+
+  // use the same curve for all four bands.
+  return [curve, curve, curve, curve];
+};
+
 const numpyLayer = new NumpyLayer({
   source: numpySource,
   style: {
     name: 'rgb',
     options: {
       pixelDepth: numpySource.get('pixelDepth'),
+      curves: getColorCurve(3000, 30000),
     },
   },
 });
@@ -58,17 +72,27 @@ const changeButton = value => {
   }
 };
 
-const changeStyle = evt => {
-  const styleName = evt.target.value;
-  changeButton(styleName);
+const getRanges = () => [
+  document.getElementById('range-min').value,
+  document.getElementById('range-max').value,
+];
 
+const getColorFunc = () =>
+  document
+    .getElementById('color-funcs')
+    .getElementsByClassName('button-primary')[0].value;
+
+const changeStyle = () => {
+  const styleName = getColorFunc();
+  const [curveMin, curveMax] = getRanges();
   const style = {
     name: 'rgb',
     options: {
       pixelDepth: numpySource.get('pixelDepth'),
+      curves: getColorCurve(curveMin, curveMax),
     },
   };
-  numpySource.set('bands', ['r', 'g', 'b', 'n', 'a']);
+  numpySource.set('bands', ['b', 'g', 'r', 'n', 'a']);
 
   if (styleName === 'gray') {
     style.name = 'gray';
@@ -76,10 +100,16 @@ const changeStyle = evt => {
     style.name = 'onlyRed';
   } else if (styleName === 'bgr') {
     // swap the source band-order
-    numpySource.set('bands', ['b', 'g', 'r', 'n', 'a']);
+    numpySource.set('bands', ['r', 'g', 'b', 'n', 'a']);
   }
 
   numpyLayer.setStyle(style);
+};
+
+const onStyleButtonClick = evt => {
+  const styleName = evt.target.value;
+  changeButton(styleName);
+  changeStyle();
 };
 
 function init() {
@@ -92,8 +122,8 @@ function init() {
       numpyLayer,
     ],
     view: new View({
-      center: fromLonLat([172.933, 1.35]),
-      zoom: 13,
+      center: fromLonLat([172.933, 1.3567]),
+      zoom: 15,
     }),
   });
 
@@ -101,8 +131,11 @@ function init() {
     .getElementById('color-funcs')
     .getElementsByClassName('button');
   for (let i = 0, ii = buttons.length; i < ii; i++) {
-    buttons[i].addEventListener('click', changeStyle);
+    buttons[i].addEventListener('click', onStyleButtonClick);
   }
+
+  document.getElementById('range-min').addEventListener('change', changeStyle);
+  document.getElementById('range-max').addEventListener('change', changeStyle);
 }
 
 init();
