@@ -56,7 +56,7 @@ const numpyLayer = new NumpyLayer({
     name: 'rgb',
     options: {
       pixelDepth: numpySource.get('pixelDepth'),
-      curves: getColorCurve(3000, 30000),
+      curves: getColorCurve(3000, 18000),
     },
   },
 });
