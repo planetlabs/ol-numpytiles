@@ -7,6 +7,7 @@
   "scripts": {
     "build": "run-s build-js build-cp",
     "build-js": "babel ./src -d ./dist",
+    "build-umd": "rollup --config rollup.config.js",
     "build-cp": "node ./scripts/build-cp.js",
     "build-demo": "rm -rf docs/ ; parcel build --dist-dir ./docs --public-url ./ ./demo/index.html",
     "cover": "jest --coverage",
@@ -79,7 +80,8 @@
     "jsdoc-to-markdown": "^7.0.1",
     "npm-run-all": "^4.1.5",
     "ol": "^6.5.0",
-    "parcel": "^2.0.0-beta.2"
+    "parcel": "^2.0.0-beta.2",
+    "rollup": "^2.56.3"
   },
   "dependencies": {
     "expr-eval": "^2.0.2"
