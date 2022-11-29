@@ -17,8 +17,11 @@ $ npm link @planet/ol-numpytiles
 
 ## Including in a project
 
+OpenLayers now supports DataTile Sources. The NumpyLoader can be used
+in conjunction with that in order to create full bitdepth raster layers.
+
 ```
-import {NumpyLayer, NumpySource} from "@planet/ol-numpytiles/ol"
+import NumpyLoader from "@planet/ol-numpytiles"
 ```
 
 
@@ -30,32 +33,8 @@ Please only publish the `dist/` directory.
 $ npm publish ./dist/
 ```
 
-## Worker optimisation
-
-The Layer rendering performance can be improved by using WebWorkers.
-To use it, the NumpyWorker needs imported the project and passed to the NumpyLayer.
-
-*Based on using the webpack worker-loader module.*
-
-```
-import NumpyWorker from 'worker-loader!@planet/ol-numpytiles/worker';
-...
-const numpySource = new NumpySource();
-numpySource.set('bands', ['r', 'g', 'b', 'a']);
-numpySource.set('dtype', 'uint8');
-numpySource.set('pixelDepth', 256);
-
-const numpyLayer = new NumpyLayer({
-  source: numpySource,
-  workerClass: NumpyWorker,
-  style: {
-    name: 'rgb',
-  },
-});
-```
-
 ## Demo!
 
-[Live demo available here!](https://planetlabs.github.io/ol-numpytiles/)
+[Live demo is available from OpenLayers!](https://openlayers.org/en/latest/examples/numpytile.html)
 
 The demo can be run locally using `npm start`.

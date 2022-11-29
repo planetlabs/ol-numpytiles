@@ -1,20 +1,17 @@
 {
   "name": "@planet/ol-numpytiles",
-  "version": "2.0.1",
-  "description": "Layer and Source to support using NumpyTiles in OpenLayers",
-  "main": "./ol.js",
+  "version": "3.0.1",
+  "description": "Data loader for NumpyTiles in OpenLayers",
+  "main": "./index.js",
   "public": true,
   "scripts": {
-    "build": "run-s build-js build-cp",
+    "build": "run-s build-umd build-js build-cp",
     "build-js": "babel ./src -d ./dist",
-    "build-umd": "rollup --config rollup.config.js",
+    "build-umd": "rollup --bundleConfigAsCjs --config rollup.config.js",
     "build-cp": "node ./scripts/build-cp.js",
-    "build-demo": "rm -rf docs/ ; parcel build --dist-dir ./docs --public-url ./ ./demo/index.html",
     "cover": "jest --coverage",
-    "docs": "jsdoc2md -r ./src/* > ./API.md",
-    "lint": "eslint demo/ src/ __tests__/",
-    "npy2png": "babel-node ./scripts/npy2png.js",
-    "start": "parcel ./demo/index.html",
+    "docs": "jsdoc2md --files ./src/* > ./API.md",
+    "lint": "eslint src/ __tests__/",
     "test": "npm run lint ; jest",
     "test:only": "jest",
     "test:watch": "jest --watch",
@@ -47,7 +44,7 @@
     "rules": {
       "react/no-array-index-key": "warn"
     },
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   },
   "keywords": [
     "planet",
@@ -58,33 +55,23 @@
   ],
   "author": "Dan \"Ducky\" Little, Ian Schneider",
   "license": "Apache-2.0",
-  "peerDependencies": {
-    "ol": "^6.2.1"
-  },
   "devDependencies": {
-    "@babel/cli": "^7.13.14",
-    "@babel/core": "^7.13.15",
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.5",
     "@babel/node": "^7.13.13",
-    "@babel/preset-env": "^7.13.15",
-    "@babel/register": "^7.13.14",
-    "babel-eslint": "^10.0.3",
-    "babel-jest": "^26.6.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/register": "^7.18.9",
+    "babel-jest": "^29.3.1",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "canvas": "^2.7.0",
-    "eslint": "^6.7.1",
-    "eslint-config-planet": "^18.1.2",
-    "eslint-plugin-jest": "^23.20.0",
-    "eslint-plugin-react": "^7.23.2",
-    "file-api": "^0.10.4",
-    "jest": "^26.6.3",
+    "eslint": "^8.28.0",
+    "eslint-config-planet": "^20.0.3",
+    "eslint-plugin-jest": "^27.1.6",
+    "eslint-plugin-react": "^7.31.11",
+    "jest": "^29.3.1",
     "jsdoc-to-markdown": "^7.0.1",
     "npm-run-all": "^4.1.5",
-    "ol": "^6.5.0",
-    "parcel": "^2.0.0-beta.2",
-    "rollup": "^2.56.3"
-  },
-  "dependencies": {
-    "expr-eval": "^2.0.2"
+    "rollup": "^3.5.0"
   },
   "targets": {
     "main": false
