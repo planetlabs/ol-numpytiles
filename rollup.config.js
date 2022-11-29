@@ -1,7 +1,7 @@
 export default {
-  input: 'src/NumpyLoader.js',
+  input: 'src/index.js',
   output: {
-    file: 'umd/NumpyLoader.js',
+    file: 'dist/umd/NumpyLoader.js',
     name: 'NumpyLoader',
     format: 'umd',
   },

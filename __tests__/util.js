@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {fromArrayBuffer} from '../src/NumpyLoader';
+import {fromArrayBuffer} from '../src/index';
 import {readFileSync} from 'fs';
 
 /* This is broken out so it can be used in other tests
